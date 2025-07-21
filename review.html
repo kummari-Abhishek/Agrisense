@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rating</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .rating {
+            display: flex;
+            direction: row;
+            justify-content: center;
+        }
+        .fa-star {
+            font-size: 11em;
+            color: #ccc;
+            cursor: pointer;
+        }
+        .fa-star.checked {
+            color: rgb(220, 155, 35);
+        }
+    </style>
+</head>
+<body>
+    <div class="rating">
+        <span class="fa fa-star" data-rating="1"></span>
+        <span class="fa fa-star" data-rating="2"></span>
+        <span class="fa fa-star" data-rating="3"></span>
+        <span class="fa fa-star" data-rating="4"></span>
+        <span class="fa fa-star" data-rating="5"></span>
+    </div>
+    <audio id="audio-1" src="public/sad .mp3"></audio>
+    <audio id="audio-2" src="path/to/audio2.mp3"></audio>
+    <audio id="audio-3" src="path/to/audio3.mp3"></audio>
+    <audio id="audio-4" src="path/to/audio4.mp3"></audio>
+    <audio id="audio-5" src="public/fear.mp3"></audio>
+    <script>
+        const stars = document.querySelectorAll('.fa-star');
+        const audios = {
+            1: document.getElementById('audio-1'),
+            2: document.getElementById('audio-2'),
+            3: document.getElementById('audio-3'),
+            4: document.getElementById('audio-4'),
+            5: document.getElementById('audio-5')
+        };
+
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const rating = star.getAttribute('data-rating');
+                stars.forEach(s => {
+                    s.classList.remove('checked');
+                    if (s.getAttribute('data-rating') <= rating) {
+                        s.classList.add('checked');
+                    }
+                });
+                audios[rating].play();
+            });
+        });
+    </script>
+</body>
+</html>
